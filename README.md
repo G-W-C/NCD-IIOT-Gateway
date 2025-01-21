@@ -23,10 +23,10 @@ This tutorial is for the Robustel EG5100 and EG5120 Industrial Edge Computing Ga
 Utilize Direct Inputs (DI), Direct Outputs (DO) and RS485 with Node-red
 ### Background
 All I/O is bound to RobustOS with the intent to make configuration and functionality 'easier'.\
-This inherently limits direct integrations with any other software or custom applications, like Node-RED, as GPIO is exclusive, meaning it can only be accessed by one application at a time. This restriction prevents multiple services from controlling the same GPIO pins simultaneously.\
+This inherently limits direct integrations with any other software or custom applications, like Node-RED, as GPIO is exclusive, meaning it can only be accessed by one application. This restriction prevents multiple services from controlling the same GPIO pins simultaneously.\
 Unfortunately, but not surprisingly, Robustel's documentation and support are exceedingly poor. This lack of support trickles down to the reseller, NCD, as their primary use case is as a cloud IIoT gateway for their wireless sensor products and not as local I/O.\
 The Robustel docs reference a CLI command set but fail to provide a complete picture of how to utilize it.\
-Much time was spent debugging this to make Command
+Much time was spent debugging to make sense of the command set in the documentation.......
 
 #### Options
 We have two options to complete our goal of using the I/O on this device:
@@ -45,6 +45,11 @@ All testing was preformed at 24VDC.
 ![Robustel DIDO Diagram](https://github.com/user-attachments/assets/da208216-00de-4b92-8e3d-3a9cdaf302aa)
 
 # DO
+The DO is by far the most straightforward of all the I/O. No additional nodes, packages, or programs are required to make this work.\
+Toggle DO1 from the shell with this command:
+    ```
+      sudo rmsg dido cmd DO_CTRL index 3 event inversion
+    ```
 ### Method
 To utilize the DO with Node-RED, we will use the API via a CLI command. This requires the user to elevate privileges using sudo and enter a password. Since Node-RED runs under the user 'ncdio', we need to modify privileges to allow Node-RED to execute this specific command without a password.
 ### Elevate privileges for the dido cmd set only
@@ -73,6 +78,12 @@ Outputs are referred to internally as:
     ![DO_node-red](https://github.com/user-attachments/assets/6f76ce61-b25a-4400-8fdc-98109881880a)
 ### Reading dido state
 RobustOS is contantly checking the state of the DI/DO and updating its status to files in ``` /var/status/dido ``` \
+We can use the watch node to monitor this directory and retrive the DO status updates. 
+![dido_read_node-red](https://github.com/user-attachments/assets/6f8ed3ba-2a51-4dde-9b6b-2da3481089d4)
+Simple UI control and Monitoring
+![UI controlDO_node-red](https://github.com/user-attachments/assets/85355754-b73c-457c-a272-31aae0be12db)
+
+Here is a complete flow for Controling and reading reading the DO from the node-red UI
 
 # DI
 
