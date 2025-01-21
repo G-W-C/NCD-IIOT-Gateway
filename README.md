@@ -39,11 +39,14 @@ We will use both options to gain access to the I/O with Node-Red.
 To Expose the DI and DO SSH access must be enabled.\
 Follow the NCD tutorial on SSH access here https://ncd.io/blog/ssh-into-your-iot-enterprise-gateway/#
 ## Wiring Diagram for DI and DO
-
+Proper wiring is essential to ensure safety and performance. Max voltage of DI/DO is 30VDC.\
+All testing was preformed at 24VDC.
+###### Excerpt from the Robustel Hardware Manual.
 ![Robustel DIDO Diagram](https://github.com/user-attachments/assets/da208216-00de-4b92-8e3d-3a9cdaf302aa)
 
 # DO
-
+### Method
+To utilize the DO with Node-RED, we will use the API via a CLI command. This requires the user to elevate permissions using sudo and enter a password. Since Node-RED runs under the user 'ncdio', we need to modify permissions to allow Node-RED to execute this specific command without a password.
 # DI
 
 # Modbus RS485
