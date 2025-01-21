@@ -48,7 +48,7 @@ All testing was preformed at 24VDC.
 ### Method
 To utilize the DO with Node-RED, we will use the API via a CLI command. This requires the user to elevate privileges using sudo and enter a password. Since Node-RED runs under the user 'ncdio', we need to modify privileges to allow Node-RED to execute this specific command without a password.
 ### Elevate privileges for the dido cmd set only
-1. Open the sudoers file with the following cmd:
+1. Open the sudoers.tmp file with the following cmd:
    ```cmd
    sudo visudo
    ```
@@ -57,6 +57,8 @@ To utilize the DO with Node-RED, we will use the API via a CLI command. This req
    ```
       ncdio ALL=(ALL) NOPASSWD: /usr/bin/rmsg dido cmd *
    ```
+  The file should look like this: [sudoers.tmp](sudoers.tmp)
+  
  4. Save the changes ```ctrl- x``` to exit ```shift - Y ``` to save.
 ### Elevate privileges for the dido cmd set only 
 # DI
