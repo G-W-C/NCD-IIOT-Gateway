@@ -79,8 +79,10 @@ Outputs are referred to internally as:
 ### Reading dido state
 RobustOS is contantly checking the state of the DI/DO and updating its status to files in ``` /var/status/dido ``` \
 We can use the watch node to monitor this directory and retrive the DO status updates. 
+
 ![dido_read_node-red](https://github.com/user-attachments/assets/6f8ed3ba-2a51-4dde-9b6b-2da3481089d4)
-Simple UI control and Monitoring
+##### Simple UI control and Monitoring
+Combining both DO write and read into a simple UI control (looks great on a cell phone, and you can connect directly to the EG5100 via WiFi with the default AP mode).
 ![UI controlDO_node-red](https://github.com/user-attachments/assets/85355754-b73c-457c-a272-31aae0be12db)
 
 Here is a complete flow for Controling and reading reading the DO from the node-red UI
