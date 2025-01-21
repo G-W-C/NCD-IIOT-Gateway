@@ -69,8 +69,10 @@ Outputs are referred to internally as:
     ```
       sudo rmsg dido cmd DO_CTRL index 3 event inversion
     ```
-2. Use a inject and debug node to confirm the the command should have a return code of ```<code>{ code: 0 }```.
+2. Use a inject and debug node to confirm the the command should have a return code of ``` { code: 0 } ```.
     ![DO_node-red](https://github.com/user-attachments/assets/6f76ce61-b25a-4400-8fdc-98109881880a)
+### Reading dido state
+RobustOS is contantly checking the state of the DI/DO and updating its status to files in ``` /var/status/dido ``` \
 
 # DI
 
