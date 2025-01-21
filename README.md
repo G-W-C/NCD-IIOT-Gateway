@@ -86,7 +86,9 @@ Combining both DO write and read into a simple UI control (looks great on a cell
 
 ![UI controlDO_node-red](https://github.com/user-attachments/assets/85355754-b73c-457c-a272-31aae0be12db)
 
-Here is a complete flow for Controling and reading reading the DO from the node-red UI
+Here is a complete flow for Controling and reading reading the DO from the node-red UI\
+[DO_Control.json](DO_Control.json)
+
 
 # DI
 
