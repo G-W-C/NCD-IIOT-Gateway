@@ -56,6 +56,7 @@ To utilize the DO with Node-RED, we will use the API via a CLI command. This req
    ```
    ncdio ALL=(ALL) NOPASSWD: /usr/bin/rmsg dido cmd *
    ```
+ 3. Save the changes ```ctrl- x``` to exit ```shift - Y ``` to save.  
 # DI
 
 # Modbus RS485
