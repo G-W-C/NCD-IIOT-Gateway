@@ -46,7 +46,7 @@ All testing was preformed at 24VDC.
 
 # DO
 The DO is by far the most straightforward of all the I/O. No additional nodes, packages, or programs are required to make this work.\
-Toggle DO1 from the shell with this command:
+We can toggle DO1 from the shell with this command:
     ```
       sudo rmsg dido cmd DO_CTRL index 3 event inversion
     ```
