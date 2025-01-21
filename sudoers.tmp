@@ -18,7 +18,6 @@ Defaults        secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/
 
 # User privilege specification
 root    ALL=(ALL:ALL) ALL
-ncdio   ALL=(ALL) NOPASSWD: /usr/bin/rmsg dido cmd *
 # Allow members of group sudo to execute any command
 %sudo   ALL=(ALL:ALL) ALL
 ncdio   ALL=(ALL) NOPASSWD: /usr/bin/rmsg dido cmd *
