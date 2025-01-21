@@ -46,7 +46,9 @@ All testing was preformed at 24VDC.
 
 # DO
 ### Method
-To utilize the DO with Node-RED, we will use the API via a CLI command. This requires the user to elevate permissions using sudo and enter a password. Since Node-RED runs under the user 'ncdio', we need to modify permissions to allow Node-RED to execute this specific command without a password.
+To utilize the DO with Node-RED, we will use the API via a CLI command. This requires the user to elevate privileges using sudo and enter a password. Since Node-RED runs under the user 'ncdio', we need to modify privileges to allow Node-RED to execute this specific command without a password.
+### Elevate privileges for the dido cmd set only
+1. Open suderos file
 # DI
 
 # Modbus RS485
