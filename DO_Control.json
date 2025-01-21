@@ -1,0 +1,376 @@
+[
+    {
+        "id": "8828232fa4f17a79",
+        "type": "tab",
+        "label": "DO",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "ce38e6f91bdc4d09",
+        "type": "watch",
+        "z": "8828232fa4f17a79",
+        "name": "",
+        "files": "/var/status/dido",
+        "recursive": "",
+        "x": 140,
+        "y": 740,
+        "wires": [
+            [
+                "4295ab065acd85cc"
+            ]
+        ]
+    },
+    {
+        "id": "6b6cc4ef4cde1cd8",
+        "type": "debug",
+        "z": "8828232fa4f17a79",
+        "name": "DO1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "DO1",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 750,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "4295ab065acd85cc",
+        "type": "file in",
+        "z": "8828232fa4f17a79",
+        "name": "read",
+        "filename": "payload",
+        "filenameType": "msg",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 290,
+        "y": 740,
+        "wires": [
+            [
+                "4b3e6898017ce0e6"
+            ]
+        ]
+    },
+    {
+        "id": "142c8d3506872393",
+        "type": "exec",
+        "z": "8828232fa4f17a79",
+        "command": "",
+        "addpay": "payload",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "DO_CTRL",
+        "x": 350,
+        "y": 480,
+        "wires": [
+            [],
+            [],
+            [
+                "80e09f46deafae72"
+            ]
+        ]
+    },
+    {
+        "id": "34f82bc1b373e6e7",
+        "type": "inject",
+        "z": "8828232fa4f17a79",
+        "name": "DO1",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "sudo rmsg dido cmd DO_CTRL index 3 event inversion",
+        "payloadType": "str",
+        "x": 150,
+        "y": 440,
+        "wires": [
+            [
+                "142c8d3506872393"
+            ]
+        ]
+    },
+    {
+        "id": "80e09f46deafae72",
+        "type": "debug",
+        "z": "8828232fa4f17a79",
+        "name": "debug 54",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 520,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "4b3e6898017ce0e6",
+        "type": "function",
+        "z": "8828232fa4f17a79",
+        "name": "Parse Status File",
+        "func": "// Create an empty object to store the parsed data\nlet result = {};\n\n// Split the incoming payload into individual lines\nlet lines = msg.payload.split('\\n');\n\n// Initialize variables to store temporary data for \"di\" and \"DO\" entries\nlet di_entries = [];\nlet DO_entries = [];\n\n// Initialize an index to manually track the line position\nlet i = 0;\n\n// Loop through the lines and parse them\nwhile (i < lines.length) {\n    let line = lines[i].trim();  // Remove any leading/trailing whitespace\n\n    // Parse DI entries\n    if (line.startsWith(\"di {\")) {\n        let di = {};\n        di.id = parseInt(lines[++i].split('=')[1].trim());\n        di.name = lines[++i].split('=')[1].trim();\n        di.level = lines[++i].split('=')[1].trim();\n        di.status = lines[++i].split('=')[1].trim();\n        di.count = lines[++i].split('=')[1].trim();\n        di_entries.push(di);\n    }\n    \n    // Parse DO entries\n    else if (line.startsWith(\"do {\")) {\n        let DO = {};\n        DO.id = parseInt(lines[++i].split('=')[1].trim());\n        DO.name = lines[++i].split('=')[1].trim();\n        DO.level = lines[++i].split('=')[1].trim();\n        DO.pulse_high = lines[++i].split('=')[1].trim();\n        DO.pulse_low = lines[++i].split('=')[1].trim();\n        DO_entries.push(DO);\n    }\n\n    i++;\n}\n\n// Add parsed DI and DO data to the result object\nresult.DI = di_entries;\nresult.DO = DO_entries;\n// Return the final structured JSON object\nmsg.payload = {\n    DO1: result.DO[0].level,\n    DO2: result.DO[1].level\n    }\nreturn [msg.payload]\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 740,
+        "wires": [
+            [
+                "09f7d0be25ab19b9",
+                "33dc5ff0bf10f659"
+            ]
+        ]
+    },
+    {
+        "id": "09f7d0be25ab19b9",
+        "type": "rbe",
+        "z": "8828232fa4f17a79",
+        "name": "RBE",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "DO1",
+        "topi": "topic",
+        "x": 610,
+        "y": 700,
+        "wires": [
+            [
+                "4f5dd0e46a672305",
+                "6b6cc4ef4cde1cd8"
+            ]
+        ]
+    },
+    {
+        "id": "1899b7b7d2c447a6",
+        "type": "inject",
+        "z": "8828232fa4f17a79",
+        "name": "DO2",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "sudo rmsg dido cmd DO_CTRL index 4 event inversion",
+        "payloadType": "str",
+        "x": 150,
+        "y": 520,
+        "wires": [
+            [
+                "142c8d3506872393"
+            ]
+        ]
+    },
+    {
+        "id": "fa0e88a5a8138135",
+        "type": "ui_button",
+        "z": "8828232fa4f17a79",
+        "name": "",
+        "group": "42d0fda47e50b5f5",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "DO 1",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "sudo rmsg dido cmd DO_CTRL index 3 event inversion",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 130,
+        "y": 480,
+        "wires": [
+            [
+                "142c8d3506872393"
+            ]
+        ]
+    },
+    {
+        "id": "9ac3ccee0563f35f",
+        "type": "ui_button",
+        "z": "8828232fa4f17a79",
+        "name": "",
+        "group": "42d0fda47e50b5f5",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "DO 2",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "sudo rmsg dido cmd DO_CTRL index 4 event inversion",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 130,
+        "y": 560,
+        "wires": [
+            [
+                "142c8d3506872393"
+            ]
+        ]
+    },
+    {
+        "id": "4f5dd0e46a672305",
+        "type": "ui_text",
+        "z": "8828232fa4f17a79",
+        "group": "42d0fda47e50b5f5",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "D0 1",
+        "format": "{{msg.DO1}}",
+        "layout": "row-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 750,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "d3725da6ed4251ce",
+        "type": "ui_text",
+        "z": "8828232fa4f17a79",
+        "group": "42d0fda47e50b5f5",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "DO 2",
+        "format": "{{msg.DO2}}",
+        "layout": "row-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 750,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "92dd702880e1da3d",
+        "type": "comment",
+        "z": "8828232fa4f17a79",
+        "name": "Write to DO",
+        "info": "",
+        "x": 110,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "35f347386e7cbb57",
+        "type": "comment",
+        "z": "8828232fa4f17a79",
+        "name": "Read dido",
+        "info": "",
+        "x": 100,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "5767f06b83d02c6f",
+        "type": "debug",
+        "z": "8828232fa4f17a79",
+        "name": "DO2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "DO2",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 750,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "33dc5ff0bf10f659",
+        "type": "rbe",
+        "z": "8828232fa4f17a79",
+        "name": "RBE",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "DO2",
+        "topi": "topic",
+        "x": 610,
+        "y": 780,
+        "wires": [
+            [
+                "5767f06b83d02c6f",
+                "d3725da6ed4251ce"
+            ]
+        ]
+    },
+    {
+        "id": "42d0fda47e50b5f5",
+        "type": "ui_group",
+        "name": "DO Contol",
+        "tab": "b7eb0374350e7de0",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "b7eb0374350e7de0",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
