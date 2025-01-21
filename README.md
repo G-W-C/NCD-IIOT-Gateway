@@ -60,7 +60,11 @@ To utilize the DO with Node-RED, we will use the API via a CLI command. This req
   The file should look like this: [sudoers.tmp](sudoers.tmp)
   
  4. Save the changes ```ctrl- x``` to exit ```shift - Y ``` to save.
-### Elevate privileges for the dido cmd set only 
+### Node-Red 
+1. Use a EXEC Node with thew following command
+    ```
+     sudo smsg
+    ```
 # DI
 
 # Modbus RS485
