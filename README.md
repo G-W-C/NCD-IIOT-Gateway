@@ -60,11 +60,18 @@ To utilize the DO with Node-RED, we will use the API via a CLI command. This req
   The file should look like this: [sudoers.tmp](sudoers.tmp)
   
  4. Save the changes ```ctrl- x``` to exit ```shift - Y ``` to save.
-### Node-Red 
-1. Use a EXEC Node with thew following command
+### Control with Node-Red
+Outputs are referred to internally as:
+* DO1 = index 3
+* DO2 = index 4
+##### Example for DO1
+1. Use a EXEC Node with the following command
     ```
-     sudo smsg
+      sudo rmsg dido cmd DO_CTRL index 3 event inversion
     ```
+2. Use a inject and debug node to confirm the the command should have a return code of ```<code>{ code: 0 }```.
+    ![DO_node-red](https://github.com/user-attachments/assets/6f76ce61-b25a-4400-8fdc-98109881880a)
+
 # DI
 
 # Modbus RS485
