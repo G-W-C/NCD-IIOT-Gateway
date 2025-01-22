@@ -16,14 +16,14 @@ This tutorial is for the Robustel EG5100 and EG5120 Industrial Edge Computing Ga
 * 2 x DI & 2 x DO for simple monitoring and control
 
 ### Software
-- Node-Red v3.1.9(Installed on NCD devices runing as under pm2)
+- Node-Red v3.1.9(Installed on NCD devices running as under pm2)
 - Node.js v16.19.1
 
 ## Purpose
-Utilize Direct Inputs (DI), Direct Outputs (DO) and RS485 with Node-red
+Utilize Direct Inputs (DI), Direct Outputs (DO) and RS485 with Node-Red
 ### Background
 All I/O is bound to RobustOS with the intent to make configuration and functionality 'easier'.\
-This inherently limits direct integrations with any other software or custom applications, like Node-RED, as GPIO is exclusive, meaning it can only be accessed by one application. This restriction prevents multiple services from controlling the same GPIO pins simultaneously.\
+This inherently limits direct integrations with any other software or custom applications, like Node-Red, as GPIO is exclusive, meaning it can only be accessed by one application. This restriction prevents multiple services from controlling the same GPIO pins simultaneously.\
 Unfortunately, but not surprisingly, Robustel's documentation and support are exceedingly poor. This lack of support trickles down to the reseller, NCD, as their primary use case is as a cloud IIoT gateway for their wireless sensor products and not as local I/O.\
 The Robustel docs reference a CLI command set but fail to provide a complete picture of how to utilize it.\
 Much time was spent debugging to make sense of the command set in the documentation.......
@@ -40,7 +40,7 @@ To Expose the DI and DO SSH access must be enabled.\
 Follow the NCD tutorial on SSH access here https://ncd.io/blog/ssh-into-your-iot-enterprise-gateway/#
 ## Wiring Diagram for DI and DO
 Proper wiring is essential to ensure safety and performance. Max voltage of DI/DO is 30VDC.\
-All testing was preformed at 24VDC.
+All testing was performed at 24VDC.
 ###### Excerpt from the Robustel Hardware Manual.
 ![Robustel DIDO Diagram](https://github.com/user-attachments/assets/da208216-00de-4b92-8e3d-3a9cdaf302aa)
 
@@ -77,8 +77,8 @@ Outputs are referred to internally as:
 2. Use a inject and debug node to confirm the the command should have a return code of ``` { code: 0 } ```.
     ![DO_node-red](https://github.com/user-attachments/assets/6f76ce61-b25a-4400-8fdc-98109881880a)
 ### Reading dido state
-RobustOS is contantly checking the state of the DI/DO and updating its status to files in ``` /var/status/dido ``` \
-We can use the watch node to monitor this directory and retrive the DO status updates. 
+RobustOS is constantly checking the state of the DI/DO and updating its status to files in ``` /var/status/dido ``` \
+We can use the watch node to monitor this directory and retrieve the DO status updates. 
 
 ![dido_read_node-red](https://github.com/user-attachments/assets/6f8ed3ba-2a51-4dde-9b6b-2da3481089d4)
 ##### Simple UI control and Monitoring
@@ -86,7 +86,7 @@ Combining both DO write and read into a simple UI control (looks great on a cell
 
 ![UI controlDO_node-red](https://github.com/user-attachments/assets/85355754-b73c-457c-a272-31aae0be12db)
 
-Here is a complete flow for Controling and reading reading the DO from the node-red UI\
+Here is a complete flow for Controlling and reading reading the DO from the node-red UI\
 [DO_Control.json](DO_Control.json)
 
 
