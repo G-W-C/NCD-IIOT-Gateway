@@ -70,7 +70,7 @@ Outputs are referred to internally as:
 * DO1 = index 3
 * DO2 = index 4
 ##### Example for DO1
-1. Use a EXEC Node with the following command
+1. Use an EXEC Node with the following command
     ```
       sudo rmsg dido cmd DO_CTRL index 3 event inversion
     ```
