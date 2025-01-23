@@ -51,7 +51,7 @@ We can toggle DO1 from the shell with this command:
       sudo rmsg dido cmd DO_CTRL index 3 event inversion
     ```
 ### Method
-To utilize the DO with Node-RED, we will use the API via a CLI command. This requires the user to elevate privileges using sudo and enter a password. Since Node-RED runs under the user 'ncdio', we need to modify privileges to allow Node-RED to execute this specific command without a password.
+To utilize the DO with Node-RED, we will run this CLI command in a EXEC node. This command requires the user to elevate privileges using sudo and enter a password. Since Node-RED runs under the user 'ncdio', we need to modify privileges to allow Node-RED to execute this specific command without a password.
 ### Elevate privileges for the dido cmd set only
 1. Open the sudoers.tmp file with the following cmd:
    ```cmd
