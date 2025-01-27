@@ -32,8 +32,8 @@ Much time was spent debugging to make sense of the command set in the documentat
 
 #### Methods of Access
 Various methods will be used to access the I/O with Node-RED:
-- ~~Unbind the gpio from the host OS~~ >(While this does work quite well and gives you the most direct control, due to its complexity, I have left it out of this tutorial unless someone asks for it)\
-- Utilize the host OS CLI Commands\
+- ~~Unbind the gpio from the host OS~~ >(While this does work quite well and gives you the most direct control, due to its complexity, I have left it out of this tutorial unless someone asks for it)
+- Utilize the host OS CLI Commands
 - Scrape data from the host OS APP by monitoring application files.
 - HostOS APP configurations and protocol conversion (Modbus)
 
