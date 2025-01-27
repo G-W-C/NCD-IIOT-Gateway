@@ -132,9 +132,9 @@ As mentioned in the previous section, [**Reading DO State**](https://github.com/
 ![RobustOS DI Config](https://github.com/user-attachments/assets/5ced6d5a-b0ce-4b17-9f5e-493d9ee74552)
 
 ### Node-RED
-This flow reads the dido files and formats the DI and DO Status into on nice JSON object.
+This flow reads the dido files and formats the DI and DO Status into on nice JSON object.[DIDO_Read.json](DIDO_Read.json)
 
 ![dido_obj_read_node-red](https://github.com/user-attachments/assets/952b72d0-a157-4817-b091-219b10493b69)
 
-[DIDO_Read.json](DIDO_Read.json)
+
 # Modbus RS485
