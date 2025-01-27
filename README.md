@@ -37,20 +37,18 @@ Various methods will be used to access the I/O with Node-RED:
 - Scrape data from the host OS APP by monitoring application files.
 - HostOS APP configurations and protocol conversion (Modbus)
 
-
 ## Enabled SSH
 To Expose the DI and DO SSH access must be enabled.\
 Follow the NCD tutorial on SSH access here https://ncd.io/blog/ssh-into-your-iot-enterprise-gateway/#
 ## Wiring Diagram for DI and DO
 >[!CAUTION]
 >Proper wiring is essential to ensure safety and performance.
->Max voltage of DI/DO is 30VDC.
+>Max voltage for DI/DO is 30VDC.
 
 ###### Excerpt from the Robustel Hardware Manual.
 ![Robustel DIDO Diagram](https://github.com/user-attachments/assets/da208216-00de-4b92-8e3d-3a9cdaf302aa)
 
 # DO
-The DO is by far the most straightforward of all the I/O. No additional nodes, packages, or programs are required to make this work.\
 We can toggle DO1 from the shell with this command:
     ```
       sudo rmsg dido cmd DO_CTRL index 3 event inversion
@@ -118,9 +116,9 @@ Here is a complete flow for controlling and reading the DO from the node-red UI\
 
 
 # DI
-As mentioned in the previous section, [**Reading DO State**](https://github.com/G-W-C/NCD-IIOT-Gateway/blob/main/README.md#reading-do-state), RobustOS writes status updates to ``` /var/status/dido ``` for the DO by default.
+As mentioned in the previous section, [**Reading DO State**](https://github.com/G-W-C/NCD-IIOT-Gateway/blob/main/README.md#reading-do-state), RobustOS writes status updates to files in the ``` /var/status/dido ``` directory.
 > [!NOTE]
-> Enable the DI in RobustOS to begin updating the dido file, then we can use watch node to monitor this directory and retrieve the DI status updates.
+> Enable the DI in RobustOS to begin updating the dido files, then use the watch node to monitor this directory and retrieve the DI status updates.
 ### Enabling DI in RobustOS
 1. Login to the web configuration UI of the IIoT Gateway [See the NCD quick start guide for details](https://ncd.io/blog/quick-start-guide-for-the-ncd-enterprise-iiot-gateway/)
 2. In the left hand menu select ***Interface*** >>>> ***DIDO***.
@@ -134,7 +132,7 @@ As mentioned in the previous section, [**Reading DO State**](https://github.com/
 ![RobustOS DI Config](https://github.com/user-attachments/assets/5ced6d5a-b0ce-4b17-9f5e-493d9ee74552)
 
 ### Node-RED
-This flow reads the dido file and formats the DI and DO Status into on nice JSON object.
+This flow reads the dido files and formats the DI and DO Status into on nice JSON object.
 
 ![dido_obj_read_node-red](https://github.com/user-attachments/assets/952b72d0-a157-4817-b091-219b10493b69)
 
