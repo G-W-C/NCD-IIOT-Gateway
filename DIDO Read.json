@@ -1,0 +1,84 @@
+[
+    {
+        "id": "ce38e6f91bdc4d09",
+        "type": "watch",
+        "z": "8828232fa4f17a79",
+        "name": "",
+        "files": "/var/status/dido",
+        "recursive": "",
+        "x": 140,
+        "y": 820,
+        "wires": [
+            [
+                "4295ab065acd85cc"
+            ]
+        ]
+    },
+    {
+        "id": "4295ab065acd85cc",
+        "type": "file in",
+        "z": "8828232fa4f17a79",
+        "name": "read",
+        "filename": "payload",
+        "filenameType": "msg",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 290,
+        "y": 820,
+        "wires": [
+            [
+                "4b3e6898017ce0e6"
+            ]
+        ]
+    },
+    {
+        "id": "4b3e6898017ce0e6",
+        "type": "function",
+        "z": "8828232fa4f17a79",
+        "name": "Parse Status File",
+        "func": "// Create an empty object to store the parsed data\nlet result = {};\n\n// Split the incoming payload into individual lines\nlet lines = msg.payload.split('\\n');\n\n// Initialize variables to store temporary data for \"di\" and \"DO\" entries\nlet di_entries = [];\nlet DO_entries = [];\n\n// Initialize an index to manually track the line position\nlet i = 0;\n\n// Loop through the lines and parse them\nwhile (i < lines.length) {\n    let line = lines[i].trim();  // Remove any leading/trailing whitespace\n\n    // Parse DI entries\n    if (line.startsWith(\"di {\")) {\n        let di = {};\n        di.id = parseInt(lines[++i].split('=')[1].trim());\n        di.name = lines[++i].split('=')[1].trim();\n        di.level = lines[++i].split('=')[1].trim();\n        di.status = lines[++i].split('=')[1].trim();\n        di.count = lines[++i].split('=')[1].trim();\n        di_entries.push(di);\n    }\n    \n    // Parse DO entries\n    else if (line.startsWith(\"do {\")) {\n        let DO = {};\n        DO.id = parseInt(lines[++i].split('=')[1].trim());\n        DO.name = lines[++i].split('=')[1].trim();\n        DO.level = lines[++i].split('=')[1].trim();\n        DO.pulse_high = lines[++i].split('=')[1].trim();\n        DO.pulse_low = lines[++i].split('=')[1].trim();\n        DO_entries.push(DO);\n    }\n\n    i++;\n}\n\n// Add parsed DI and DO data to the result object\nresult.DI = di_entries;\nresult.DO = DO_entries;\n// Return the final structured JSON object\nmsg.payload = {\n        DI1: result.DI[0].level,\n    DI2: result.DI[1].level,\n    DO1: result.DO[0].level,\n    DO2: result.DO[1].level,\n    };\nreturn [msg.payload]\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 820,
+        "wires": [
+            [
+                "22451a67b9d92309"
+            ]
+        ]
+    },
+    {
+        "id": "35f347386e7cbb57",
+        "type": "comment",
+        "z": "8828232fa4f17a79",
+        "name": "Read DIDO",
+        "info": "",
+        "x": 110,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "22451a67b9d92309",
+        "type": "debug",
+        "z": "8828232fa4f17a79",
+        "name": "DIDO Obj",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 820,
+        "wires": []
+    }
+]
