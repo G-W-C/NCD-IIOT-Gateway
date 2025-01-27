@@ -30,12 +30,13 @@ Unfortunately, but not surprisingly, Robustel's documentation and support are ex
 The Robustel docs reference a CLI command set but fail to provide a complete picture of how to utilize it.\
 Much time was spent debugging to make sense of the command set in the documentation.......
 
-#### Methods
-We have two options to complete our goal of using the I/O on this device:
-- ~~Unbind the gpio from the host OS~~ (While this does work quite well and gives you the most direct control, I have left it out of this tutorial unless someone asks for it.)\
+#### Methods of Access
+Various methods will be used to access the I/O with Node-RED:
+- ~~Unbind the gpio from the host OS~~ >(While this does work quite well and gives you the most direct control, due to its complexity, I have left it out of this tutorial unless someone asks for it)\
+- Utilize the host OS CLI Commands\
+- Scrape data from the host OS APP by monitoring application files.
+- HostOS APP configurations and protocol conversion (Modbus)
 
-- Utilize the host OS through and API\
-We will use both options to gain access to the I/O with Node-RED.
 
 ## Enabled SSH
 To Expose the DI and DO SSH access must be enabled.\
@@ -112,7 +113,7 @@ Combining both DO write and read into a simple UI control (looks great on a cell
 
 ![UI controlDO_node-red](https://github.com/user-attachments/assets/85355754-b73c-457c-a272-31aae0be12db)
 
-Here is a complete flow for Controlling and reading the DO from the node-red UI\
+Here is a complete flow for controlling and reading the DO from the node-red UI\
 [DO_Control.json](DO_Control.json)
 
 
