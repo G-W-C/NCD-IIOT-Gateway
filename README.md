@@ -102,8 +102,8 @@ Outputs are referred to internally as:
     ```
 2. Use an inject and debug node to confirm the the command should have a return code of ``` { code: 0 } ```.
     ![DO_node-red](https://github.com/user-attachments/assets/6f76ce61-b25a-4400-8fdc-98109881880a)
-### Reading dido state
-RobustOS is constantly checking the state of the DI/DO and updating its status to files in ``` /var/status/dido ``` \
+### Reading DO state
+RobustOS is constantly checking the state of the DO and updating its status to files in ``` /var/status/dido ``` \
 We can use the watch node to monitor this directory and retrieve the DO status updates. 
 
 ![dido_read_node-red](https://github.com/user-attachments/assets/6f8ed3ba-2a51-4dde-9b6b-2da3481089d4)
