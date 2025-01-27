@@ -136,6 +136,6 @@ As mentioned in the previous section, [**Reading DO State**](https://github.com/
 This flow reads the dido file and formats the DI and DO Status into on nice JSON object.
 
 ![dido_obj_read_node-red](https://github.com/user-attachments/assets/952b72d0-a157-4817-b091-219b10493b69)
-This flow reads the dido file and formats the DI and DO into on nice JSON object.
+
 [DIDO_Read.json](DIDO_Read.json)
 # Modbus RS485
