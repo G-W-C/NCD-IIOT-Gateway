@@ -112,14 +112,15 @@ Combining both DO write and read into a simple UI control (looks great on a cell
 
 ![UI controlDO_node-red](https://github.com/user-attachments/assets/85355754-b73c-457c-a272-31aae0be12db)
 
-Here is a complete flow for Controlling and reading reading the DO from the node-red UI\
+Here is a complete flow for Controlling and reading the DO from the node-red UI\
 [DO_Control.json](DO_Control.json)
 
 
 # DI
-As mentioned in the section; [**Reading DO State**](https://github.com/G-W-C/NCD-IIOT-Gateway/blob/main/README.md#reading-do-state) RobustOS updates status to files in ``` /var/status/dido ``` for the DO\
-We need to enable the DI in RobustOS to begin updating the dido file then we can use the same watch node to monitor this directory and retrieve the DI status updates.
-### Configure DO in RobustOS
+As mentioned in the previous section, [**Reading DO State**](https://github.com/G-W-C/NCD-IIOT-Gateway/blob/main/README.md#reading-do-state), RobustOS writes status updates to ``` /var/status/dido ``` for the DO by default.
+> [!NOTE]
+> Enable the DI in RobustOS to begin updating the dido file, then we can use watch node to monitor this directory and retrieve the DI status updates.
+### Enabling DI in RobustOS
 1. Login to the web configuration UI of the IIoT Gateway [See the NCD quick start guide for details](https://ncd.io/blog/quick-start-guide-for-the-ncd-enterprise-iiot-gateway/)
 2. In the left hand menu select ***Interface*** >>>> ***DIDO***.
 3. Within the DIDO Settings select ![image](https://github.com/user-attachments/assets/70f03cfe-80ef-4e7c-ab0b-6aac82ddfdbd) to enter the settings for each DI.
@@ -129,5 +130,8 @@ We need to enable the DI in RobustOS to begin updating the dido file then we can
     * Click ![image](https://github.com/user-attachments/assets/832c7a94-1c16-4f06-9209-c92785f47cf5)
       
 5.Click ***Save & Apply*** ![image](https://github.com/user-attachments/assets/ebb3047a-099c-41f6-8597-0fd8d3be9fed) in the top right of the screen.
-
+### Node-Red
+![dido_obj_read_node-red](https://github.com/user-attachments/assets/952b72d0-a157-4817-b091-219b10493b69)
+This flow reads the dido file and formats the DI and DO into on nice JSON object.
+[DIDO_Read.json](DIDO_Read.json)
 # Modbus RS485
