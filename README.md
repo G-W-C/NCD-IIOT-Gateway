@@ -117,5 +117,17 @@ Here is a complete flow for Controlling and reading reading the DO from the node
 
 
 # DI
+As mentioned in the section; [**Reading DO State**](https://github.com/G-W-C/NCD-IIOT-Gateway/blob/main/README.md#reading-do-state) RobustOS updates status to files in ``` /var/status/dido ``` for the DO\
+We need to enable the DI in RobustOS to begin updating the dido file then we can use the same watch node to monitor this directory and retrieve the DI status updates.
+### Configure DO in RobustOS
+1. Login to the web configuration UI of the IIoT Gateway [See the NCD quick start guide for details](https://ncd.io/blog/quick-start-guide-for-the-ncd-enterprise-iiot-gateway/)
+2. In the left hand menu select ***Interface*** >>>> ***DIDO***.
+3. Within the DIDO Settings select ![image](https://github.com/user-attachments/assets/70f03cfe-80ef-4e7c-ab0b-6aac82ddfdbd) to enter the settings for each DI.
+4. In General Settings
+    * Toggle ***Enable*** to ![image](https://github.com/user-attachments/assets/8ef15f18-dd51-4eda-a23a-bbf1f5e0abd8)
+
+    * Click ![image](https://github.com/user-attachments/assets/832c7a94-1c16-4f06-9209-c92785f47cf5)
+      
+5.Click ***Save & Apply*** ![image](https://github.com/user-attachments/assets/ebb3047a-099c-41f6-8597-0fd8d3be9fed) in the top right of the screen.
 
 # Modbus RS485
