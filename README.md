@@ -131,7 +131,7 @@ As mentioned in the previous section, [**Reading DO State**](https://github.com/
 5.Click ***Save & Apply*** ![image](https://github.com/user-attachments/assets/ebb3047a-099c-41f6-8597-0fd8d3be9fed) in the top right of the screen.
 ![RobustOS DI Config](https://github.com/user-attachments/assets/5ced6d5a-b0ce-4b17-9f5e-493d9ee74552)
 
-### Node-RED
+### Read DI with Node-RED
 This flow reads the dido files and formats the DI and DO Status into on nice JSON object.
 [DIDO_Read.json](DIDO_Read.json)
 
